@@ -1,0 +1,111 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="utf-8" />
+    <title>Association des Économistes de l'Afrique</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="{% static 'core/css/style.css' %}" rel="stylesheet">
+    <style>body { font-family: 'Inter', sans-serif; }</style>
+</head>
+<body class="bg-slate-100 flex flex-col min-h-screen">
+    <div class="w-full max-w-[1440px] bg-white shadow-xl min-h-screen flex flex-col relative mx-auto">
+        <nav class="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-sm">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-20">
+                    <a href="{% url 'index' %}" class="flex items-center gap-2">
+                        <div class="h-8 w-8 bg-[#16a34a] rounded-full flex items-center justify-center relative"><div class="h-2 w-2 bg-yellow-400 rounded-full"></div></div>
+                        <div class="flex flex-col leading-tight"><span class="text-[9px] font-bold text-gray-600 uppercase">Association des</span><span class="text-xs font-extrabold text-slate-900 uppercase">Économistes de l'Afrique</span></div>
+                    </a>
+                        <div class="hidden xl:flex items-center gap-6">
+                        <div class="hidden xl:flex items-center gap-6 w-full">
+                            <div class="flex space-x-1 mx-auto">
+                                {% with p=page %}
+                                <a href="{% url 'index' %}" class="px-3 py-2 text-[11px] font-bold uppercase rounded-sm {% if p == 'Accueil' %}bg-[#fbbf24] text-slate-900{% else %}text-gray-600 hover:text-[#c25e3d]{% endif %}">Accueil</a>
+                                <a href="{% url 'about' %}" class="px-3 py-2 text-[11px] font-bold uppercase rounded-sm {% if p == 'À propos' %}bg-[#fbbf24] text-slate-900{% else %}text-gray-600 hover:text-[#c25e3d]{% endif %}">À propos</a>
+                                <a href="{% url 'news' %}" class="px-3 py-2 text-[11px] font-bold uppercase rounded-sm {% if p == 'Actualités' %}bg-[#fbbf24] text-slate-900{% else %}text-gray-600 hover:text-[#c25e3d]{% endif %}">Actualités</a>
+                                <a href="{% url 'members' %}" class="px-3 py-2 text-[11px] font-bold uppercase rounded-sm {% if p == 'Membres' %}bg-[#fbbf24] text-slate-900{% else %}text-gray-600 hover:text-[#c25e3d]{% endif %}">Membres</a>
+                                <a href="{% url 'publications' %}" class="px-3 py-2 text-[11px] font-bold uppercase rounded-sm {% if p == 'Recherche & Publications' %}bg-[#fbbf24] text-slate-900{% else %}text-gray-600 hover:text-[#c25e3d]{% endif %}">Recherche &amp; Publications</a>
+                                <a href="{% url 'contact' %}" class="px-3 py-2 text-[11px] font-bold uppercase rounded-sm {% if p == 'Contact' %}bg-[#fbbf24] text-slate-900{% else %}text-gray-600 hover:text-[#c25e3d]{% endif %}">Contact</a>
+                                {% endwith %}
+                            </div>
+                            <div class="flex items-center gap-3 ml-auto">
+                                <a href="#" title="Recherche" class="text-gray-600 hover:text-[#c25e3d]"><i data-lucide="search"></i></a>
+                                <a href="{% url 'join' %}" class="bg-[#c25e3d] text-white px-6 py-2.5 rounded-full text-[10px] font-bold uppercase hover:bg-orange-700 transition">Devenir Membre</a>
+                                <div class="hidden xl:flex items-center gap-3 ml-4">
+                                    <a href="{{ settings.social.twitter }}" title="Twitter" class="text-gray-600 hover:text-[#c25e3d]"><i data-lucide="twitter"></i></a>
+                                    <a href="{{ settings.social.facebook }}" title="Facebook" class="text-gray-600 hover:text-[#c25e3d]"><i data-lucide="facebook"></i></a>
+                                    <a href="{{ settings.social.linkedin }}" title="LinkedIn" class="text-gray-600 hover:text-[#c25e3d]"><i data-lucide="linkedin"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="mobile-menu-btn" class="xl:hidden p-2 text-gray-700"><i data-lucide="menu"></i></button>
+                </div>
+            </div>
+            <div id="mobile-menu" class="hidden xl:hidden bg-white border-t p-4 space-y-2 absolute w-full z-50 shadow-lg">
+                <a href="{% url 'index' %}" class="block py-2 font-bold uppercase text-sm">Accueil</a>
+                <a href="{% url 'about' %}" class="block py-2 font-bold uppercase text-sm">À propos</a>
+                <a href="{% url 'news' %}" class="block py-2 font-bold uppercase text-sm">Actualités</a>
+                <a href="{% url 'members' %}" class="block py-2 font-bold uppercase text-sm">Membres</a>
+                <a href="{% url 'publications' %}" class="block py-2 font-bold uppercase text-sm">Publications</a>
+                <a href="{% url 'contact' %}" class="block py-2 font-bold uppercase text-sm">Contact</a>
+            </div>
+        </nav>
+
+        <main class="flex-grow">
+            {% block content %}{% endblock %}
+        </main>
+
+        <footer class="bg-[#1f2937] text-white pt-12 pb-6">
+             <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                 <div>
+                     <div class="flex items-start gap-2 mb-3">
+                         <div class="h-8 w-8 bg-[#16a34a] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"><div class="h-2 w-2 bg-yellow-400 rounded-full"></div></div>
+                         <div class="flex flex-col">
+                             <span class="text-[9px] font-bold text-gray-300 uppercase">Association des</span>
+                             <span class="text-xs font-extrabold text-white uppercase leading-tight">Économistes de<br/>l'Afrique</span>
+                         </div>
+                     </div>
+                     <p class="text-xs text-gray-300 leading-relaxed mt-2">Promouvoir l'excellence économique en Afrique.</p>
+                 </div>
+                 <div>
+                     <h4 class="text-xs font-bold uppercase tracking-wider mb-4 text-white">Liens rapides</h4>
+                     <ul class="text-xs text-gray-300 space-y-2">
+                         <li><a href="{% url 'index' %}" class="hover:text-[#fbbf24]">Accueil</a></li>
+                         <li><a href="{% url 'about' %}" class="hover:text-[#fbbf24]">À propos</a></li>
+                         <li><a href="{% url 'members' %}" class="hover:text-[#fbbf24]">Membres</a></li>
+                         <li><a href="{% url 'publications' %}" class="hover:text-[#fbbf24]">Recherche</a></li>
+                     </ul>
+                 </div>
+                 <div>
+                     <h4 class="text-xs font-bold uppercase tracking-wider mb-4 text-white">Informations de contact</h4>
+                     <ul class="text-xs text-gray-300 space-y-2">
+                        <li>{{ settings.email_contact }}</li>
+                        <li>{{ settings.phone }}</li>
+                        <li>{{ settings.address }}</li>
+                     </ul>
+                 </div>
+                 <div>
+                     <h4 class="text-xs font-bold uppercase tracking-wider mb-4 text-white">Inscrivez-vous à notre newsletter</h4>
+                     <form class="flex gap-1 mb-4">
+                         <input type="email" placeholder="Votre email" class="px-3 py-2 rounded text-xs flex-grow text-gray-900" />
+                         <button type="button" class="bg-[#c25e3d] text-white px-4 py-2 rounded text-xs font-bold hover:bg-orange-700">S'abonner</button>
+                     </form>
+                     <div class="flex items-center gap-3">
+                         <a href="{{ settings.social.twitter }}" class="text-[#fbbf24] hover:text-white"><i data-lucide="twitter" class="w-4 h-4"></i></a>
+                         <a href="{{ settings.social.facebook }}" class="text-[#fbbf24] hover:text-white"><i data-lucide="facebook" class="w-4 h-4"></i></a>
+                         <a href="{{ settings.social.linkedin }}" class="text-[#fbbf24] hover:text-white"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+                     </div>
+                 </div>
+             </div>
+             <div class="border-t border-slate-700 pt-6 text-center"><p class="text-xs text-gray-400 uppercase">Mentions légales | Politique de l'organisation | Crédit | CGU Consommateurs | À propos</p></div>
+        </footer>
+    </div>
+    <script src="{% static 'core/js/main.js' %}"></script>
+    <script>if(window.lucide) lucide.createIcons();</script>
+</body>
+</html>

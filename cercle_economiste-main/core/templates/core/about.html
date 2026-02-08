@@ -1,0 +1,90 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<div class="bg-white py-16 px-4 sm:px-8 lg:px-16">
+    <div class="max-w-6xl mx-auto">
+        <!-- Qui sommes-nous section -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+            <div class="flex flex-col justify-center">
+                <h1 class="text-2xl font-bold uppercase mb-6 border-l-4 border-[#c25e3d] pl-4">{{ about.title }}</h1>
+                <div class="text-gray-700 text-sm leading-relaxed whitespace-pre-wrap">{{ about.content }}</div>
+            </div>
+            {% if about.image_url %}
+            <div class="flex items-center justify-center">
+                <img src="{{ about.image_url }}" alt="{{ about.title }}" class="w-full rounded-lg shadow-lg object-cover" />
+            </div>
+            {% endif %}
+        </div>
+        
+        <!-- Images de qui sommes-nous -->
+        {% if gallery %}
+        <div class="mt-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {% for img in gallery %}
+                <div class="rounded-lg overflow-hidden shadow-md hover:shadow-xl transition bg-white">
+                    <div class="relative">
+                        <img src="{{ img.image_url }}" alt="{{ img.title }}" class="w-full h-64 object-cover hover:scale-105 transition duration-300" />
+                        <div class="absolute top-3 right-3 bg-white/80 rounded-full p-2 shadow"> </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold uppercase">{{ img.title }}</h3>
+                        {% if img.description %}
+                        <p class="text-sm text-gray-600 mt-2">{{ img.description }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+        
+        <!-- Valeurs fondamentales + Témoignage -->
+        <div class="mt-24 bg-gray-50 py-12 px-6 rounded-lg">
+            <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div>
+                    <h2 class="text-2xl font-bold uppercase mb-6">Valeurs fondamentales</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-8 h-8 rounded-full bg-[#c25e3d] flex items-center justify-center text-white">✓</div>
+                            <div>
+                                <h4 class="font-bold">Intégrité</h4>
+                                <p class="text-sm text-gray-500">Données transparentes et vérifiables.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-8 h-8 rounded-full bg-[#c25e3d] flex items-center justify-center text-white">✓</div>
+                            <div>
+                                <h4 class="font-bold">Excellence</h4>
+                                <p class="text-sm text-gray-500">Rigueur scientifique aux standards mondiaux.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-8 h-8 rounded-full bg-[#c25e3d] flex items-center justify-center text-white">✓</div>
+                            <div>
+                                <h4 class="font-bold">Inclusion</h4>
+                                <p class="text-sm text-gray-500">Équité régionale et représentativité africaine.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-8 h-8 rounded-full bg-[#c25e3d] flex items-center justify-center text-white">✓</div>
+                            <div>
+                                <h4 class="font-bold">Action</h4>
+                                <p class="text-sm text-gray-500">Recherche orientée vers des résultats tangibles.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative">
+                    {% if testimonials %}
+                    {% with testimonials.0 as t %}
+                    <div class="absolute -top-12 right-0 w-full lg:w-3/4 bg-[#0f2130] text-white p-8 rounded shadow-lg">
+                        <p class="italic text-lg leading-relaxed">"{{ t.quote }}"</p>
+                        <div class="mt-6 text-sm uppercase tracking-wider text-yellow-400">{{ t.author }} — {{ t.role }}</div>
+                    </div>
+                    {% endwith %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

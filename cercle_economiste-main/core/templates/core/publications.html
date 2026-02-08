@@ -1,0 +1,24 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<div class="bg-white py-16 px-8 sm:px-16 lg:px-32">
+    <div class="max-w-6xl mx-auto">
+        <h1 class="text-2xl font-bold uppercase mb-12 pl-4 border-l-4 border-[#c25e3d]">Recherche & Publications</h1>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {% for item in publications %}
+            <div class="group cursor-pointer flex flex-col bg-white border border-gray-100 shadow-sm hover:shadow-lg transition rounded-lg overflow-hidden">
+                <div class="p-3 bg-gray-50">
+                    <div class="relative aspect-[4/3] overflow-hidden rounded border border-gray-200">
+                        <img src="{{ item.image_url }}" class="w-full h-full object-cover group-hover:scale-105 transition">
+                        <div class="absolute top-2 left-2 bg-white/95 px-2 py-1 text-[9px] font-bold uppercase tracking-wider text-slate-900 shadow-sm rounded-sm">{{ item.category }}</div>
+                    </div>
+                </div>
+                <div class="p-5 flex flex-col flex-grow">
+                    <h3 class="text-sm font-bold text-slate-900 group-hover:text-[#c25e3d] transition mb-3">{{ item.title }}</h3>
+                    <p class="text-[10px] text-gray-400 uppercase tracking-wide border-t border-gray-100 pt-3">{{ item.date_str }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
