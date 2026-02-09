@@ -52,7 +52,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'association_cabro_db',
-        'USER': 'root',
+        'USER': 'cabro',
         'PASSWORD': '32Cyr@cyr',
         'HOST': '127.0.0.1',
         'PORT': '3306',
